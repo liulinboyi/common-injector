@@ -21,7 +21,7 @@ module.exports = (env) => {
         '.js', '.jsx', '.ts', '.tsx',
       ],
       alias: {
-        "@indiv": path.resolve(__dirname, 'packages'),
+        "common-injector": path.resolve(__dirname, 'src'),
       },
     },
 

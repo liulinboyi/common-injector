@@ -1,5 +1,4 @@
 import { rootInjector, Injector } from './injector';
-import { Injected } from './injected';
 
 /**
  * Decorator @Injectable
@@ -8,14 +7,13 @@ import { Injected } from './injected';
  * defalut injector is rootInjector
  * if argument has injector, will use other injector
  *
+ * @export
  * @param {Injector} [injector]
- * @returns {(_constructor: Function) => Function}
+ * @returns {(_constructor: Function) => void}
  */
-export function Injectable(injector?: Injector): (_constructor: Function) => Function {
-  return function (_constructor: Function): Function {
-      Injected(_constructor);
+export function Injectable(injector?: Injector): (_constructor: Function) => void {
+  return function (_constructor: Function): void {
       if (injector) injector.setProvider(_constructor, _constructor);
       if (!injector) rootInjector.setProvider(_constructor, _constructor);
-      return _constructor;
   };
 }

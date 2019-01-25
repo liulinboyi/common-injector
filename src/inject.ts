@@ -1,28 +1,30 @@
 import 'reflect-metadata';
+import { Injector, rootInjector } from './injector';
+
+export type InjectOptions = {
+  provide?: any;
+  injector?: Injector;
+};
 
 /**
- * For declear dependence in Class
+ * For declearation dependence in Class
  *
  * @export
- * @param {any} [dependence]
- * @returns
+ * @param {InjectOptions} [injectOptions]
+ * @returns {(_constructor: any, propertyName: string) => void}
  */
-export function Inject(dependence?: any): Function {
-  return function (_constructor: any, propertyName: string) {
-    // TODO 获取 属性
-    const paramsTypes: Function[] = Reflect.getMetadata('design:paramtypes', _constructor);
-    if (paramsTypes && paramsTypes.length) {
-      paramsTypes.forEach(v => {
-        if (v === _constructor) {
-          throw new Error('不可以依赖自身');
-        } else {
-          if ((_constructor as any)._needInjectedClass) {
-            (_constructor as any)._needInjectedClass.push(v);
-          } else {
-            (_constructor as any)._needInjectedClass = [v];
-          }
-        }
-      });
-    }
+export function Inject(injectOptions?: InjectOptions): (_constructor: any, propertyName: string) => void {
+  return function (_constructor: any, propertyName: string): void {
+    const  propertyType: any = injectOptions && injectOptions.provide ? injectOptions.provide : Reflect.getMetadata('design:type', _constructor, propertyName);
+    const injector: Injector = injectOptions && injectOptions.injector ? injectOptions.injector : rootInjector;
+
+    if (injector.getInstance(propertyType)) _constructor[propertyName] = injector.getInstance(propertyType);
+    else if (injector.getProvider(propertyType)) {
+      const providerClass = injector.getProvider(propertyType);
+      if (!providerClass) throw Error(`injector can't find provider: ${(propertyType as any).name}`);
+      const providerInsntance = new providerClass();
+      injector.setInstance(propertyType, providerInsntance);
+      _constructor[propertyName] = providerInsntance;
+    } else throw Error(`injector can't find provider: ${(propertyType as any).name}`);
   };
 }

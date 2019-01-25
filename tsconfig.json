@@ -17,9 +17,13 @@
     "lib": ["dom", "es2015.promise", "es5", "es2017"],
     "declaration": false,
     "paths": {
-      "common-injector": ["./src/*"]
+      "common-injector": ["./src"]
     },
   },
+  "include": [
+    "src/**/*",
+    "demo/**/*",
+  ],
   "exclude": [
     "node_modules",
   ]

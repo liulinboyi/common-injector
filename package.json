@@ -2,9 +2,12 @@
   "name": "common-injector",
   "version": "0.0.0",
   "description": "Heavily influenced by Angular and it's implementation of dependency injection. Inspired by Angular and Indiv.",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run clean && webpack --watch --mode=development & nodemon app.js",
+    "start:js": "npm run clean && webpack --watch --env=testjs --mode=development & nodemon app.js",
+    "build": "npm run clean && rm -rf build && rollup --config ./rollup.typescript.config.js && rollup --config ./rollup.config.js && rm -rf build/bundle.js",
+    "clean": "rm -rf build dist .rpt2_cache"
   },
   "repository": {
     "type": "git",

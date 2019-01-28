@@ -18,7 +18,7 @@ export default {
     typescript({
       typescript: require('typescript'),
       rollupCommonJSResolveHack: true,
-      tsconfig: "tsconfig.json",
+      tsconfig: "./src/tsconfig.json",
     }),
     resolve({
       jsnext: true,

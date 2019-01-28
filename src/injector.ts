@@ -65,19 +65,19 @@ export class Injector {
    * @memberof Injector
    */
   public getInstance(key: any): any {
-    if (this.instanceMap.has(key)) return this.instanceMap.get(key);
-    return null;
-  }
-
-  /**
-   * set value of provider by key
-   *
-   * @param {*} key
-   * @param {*} value
-   * @memberof Injector
-   */
-  public setValue(key: any, value: any): void {
-    if (!this.instanceMap.has(key)) this.instanceMap.set(key, value);
+    if (this.instanceMap.has(key)) {
+      return this.instanceMap.get(key);
+    } else {
+      if (this.getProvider(key)) {
+        const providerClass = this.getProvider(key);
+        const providerInsntance = new providerClass();
+        this.setInstance(key, providerInsntance);
+        return providerInsntance; 
+      } else {
+        console.error(`injector can't find provider: ${(key as any).name}`);
+        return undefined;
+      }
+    }
   }
 }
 

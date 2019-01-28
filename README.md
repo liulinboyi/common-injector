@@ -137,7 +137,7 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
 
    For example, we will creat a injector `otherInjector` as container and `TestService2` will be put in `otherInjector` as a a singleton instance.
 
-   例如，我们创建一盒注入器 `otherInjector` 作为容器，并把 `TestService2` 放到这个容器内成为一个单例。
+   例如，我们创建一个注入器 `otherInjector` 作为容器，并把 `TestService2` 放到这个容器内成为一个单例。
 
   ```typescript
   import { Injectable, Inject, Injector } from 'common-injector';

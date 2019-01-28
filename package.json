@@ -2,9 +2,17 @@
   "name": "common-injector",
   "version": "0.0.0",
   "description": "Heavily influenced by Angular and it's implementation of dependency injection. Inspired by Angular and Indiv.",
-  "main": "index.js",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run clean && webpack --watch --mode=development & nodemon app.js",
+    "start:js": "npm run clean && webpack --watch --env=testjs --mode=development & nodemon app.js",
+    "build": "npm run clean && rm -rf build && rollup --config ./rollup.typescript.config.js && rollup --config ./rollup.config.js && rm -rf build/bundle.js",
+    "clean": "rm -rf build dist .rpt2_cache",
+    "pub-publish": "npm run build && npm run publish"
   },
   "repository": {
     "type": "git",
@@ -15,5 +23,47 @@
   "bugs": {
     "url": "https://github.com/DimaLiLongJi/common-injector/issues"
   },
-  "homepage": "https://github.com/DimaLiLongJi/common-injector#readme"
+  "homepage": "https://github.com/DimaLiLongJi/common-injector#readme",
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-decorators": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime-corejs2": "^7.2.0",
+    "@types/jsdom": "^12.2.1",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-eslint": "^8.2.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "css-loader": "^1.0.1",
+    "ejs": "^2.6.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-config-react": "^1.1.7",
+    "eslint-import-resolver-babel-module": "^4.0.0-beta.3",
+    "eslint-import-resolver-webpack": "^0.8.4",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-react": "^7.5.1",
+    "express": "^4.16.3",
+    "lerna": "^3.10.5",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "nodemon": "^1.17.5",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-typescript2": "^0.17.1",
+    "rollup-plugin-uglify": "^6.0.0",
+    "style-loader": "^0.23.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.3",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  }
 }

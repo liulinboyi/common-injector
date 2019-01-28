@@ -1,9 +1,10 @@
-<a name="0.0.1-alpha.0"></a>
-# [0.0.1-alpha.0](https://github.com/DimaLiLongJi/InDiv/releases/tag/v0.0.1-alpha.0) (2019-01-04)
+<a name="0.0.0"></a>
+# [0.0.0](https://github.com/DimaLiLongJi/common-injector/releases/tag/v0.0.0) (2019-01-28)
 
 
 ### Features
 
-* **package:** now @indiv/core @indiv/common @indiv/platform-browser @indiv/router
-* **Virtual DOM:** rewrite virtual DOM and renderer
+* **injector:** export `rootInjector` and `Injector` for IOC container
+* **injectable:** export `Injectable` for declare dependency for injection
+* **inject:** export `Inject` for declare dependency which need to be injected
 

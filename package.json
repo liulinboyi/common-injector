@@ -12,7 +12,7 @@
     "start:js": "npm run clean && webpack --watch --env=testjs --mode=development & nodemon app.js",
     "build": "npm run clean && rm -rf build && rollup --config ./rollup.typescript.config.js && rollup --config ./rollup.config.js && rm -rf build/bundle.js",
     "clean": "rm -rf build dist .rpt2_cache",
-    "pub-publish": "npm run build && npm run publish"
+    "pub-publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",

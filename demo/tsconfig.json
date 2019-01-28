@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "../",
     "module": "esNext",
     "moduleResolution": "node",
     "target": "es5",
@@ -15,15 +15,9 @@
     "inlineSourceMap": true,
     "noEmitHelpers": false,
     "lib": ["dom", "es2015.promise", "es5", "es2017"],
-    "declaration": true,
+    "declaration": false,
     "paths": {
       "common-injector": ["./src"]
     },
   },
-  "include": [
-    "src/**/*",
-  ],
-  "exclude": [
-    "node_modules",
-  ]
 }

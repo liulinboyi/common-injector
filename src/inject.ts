@@ -11,10 +11,10 @@ export type InjectOptions = {
  *
  * @export
  * @param {InjectOptions} [injectOptions]
- * @returns {(_constructor: any, propertyName: string) => void}
+ * @returns {(_constructor: any, propertyName: string) => any}
  */
-export function Inject(injectOptions?: InjectOptions): (_constructor: any, propertyName: string) => void {
-  return function (_constructor: any, propertyName: string): void {
+export function Inject(injectOptions?: InjectOptions): (_constructor: any, propertyName: string) => any {
+  return function (_constructor: any, propertyName: string): any {
     const  propertyType: any = injectOptions && injectOptions.provide ? injectOptions.provide : Reflect.getMetadata('design:type', _constructor, propertyName);
     const injector: Injector = injectOptions && injectOptions.injector ? injectOptions.injector : rootInjector;
 
@@ -26,5 +26,7 @@ export function Inject(injectOptions?: InjectOptions): (_constructor: any, prope
       injector.setInstance(propertyType, providerInsntance);
       _constructor[propertyName] = providerInsntance;
     } else throw Error(`injector can't find provider: ${(propertyType as any).name}`);
+
+    return (_constructor as any)[propertyName];
   };
 }

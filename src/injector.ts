@@ -7,7 +7,21 @@
  * @class Injector
  */
 export class Injector {
+  /**
+   * provider map: save provider with key and value
+   *
+   * @private
+   * @type {Map<any, any>}
+   * @memberof Injector
+   */
   private readonly providerMap: Map<any, any> = new Map();
+  /**
+   * instance map: save singleton instance with key and value
+   *
+   * @private
+   * @type {Map<any, any>}
+   * @memberof Injector
+   */
   private readonly instanceMap: Map<any, any> = new Map();
 
   /**
@@ -53,6 +67,17 @@ export class Injector {
   public getInstance(key: any): any {
     if (this.instanceMap.has(key)) return this.instanceMap.get(key);
     return null;
+  }
+
+  /**
+   * set value of provider by key
+   *
+   * @param {*} key
+   * @param {*} value
+   * @memberof Injector
+   */
+  public setValue(key: any, value: any): void {
+    if (!this.instanceMap.has(key)) this.instanceMap.set(key, value);
   }
 }
 

@@ -9,11 +9,12 @@ import { rootInjector, Injector } from './injector';
  *
  * @export
  * @param {Injector} [injector]
- * @returns {(_constructor: Function) => void}
+ * @returns {(_constructor: any) => any}
  */
-export function Injectable(injector?: Injector): (_constructor: Function) => void {
-  return function (_constructor: Function): void {
+export function Injectable(injector?: Injector): (_constructor: any) => any {
+  return function (_constructor: any): any {
       if (injector) injector.setProvider(_constructor, _constructor);
       if (!injector) rootInjector.setProvider(_constructor, _constructor);
+      return _constructor;
   };
 }

@@ -15,15 +15,6 @@
     "inlineSourceMap": true,
     "noEmitHelpers": false,
     "lib": ["dom", "es2015.promise", "es5", "es2017"],
-    "declaration": false,
-    "paths": {
-      "common-injector": ["./src"]
-    },
+    "declaration": true,
   },
-  "include": [
-    "src/**/*",
-  ],
-  "exclude": [
-    "node_modules",
-  ]
 }

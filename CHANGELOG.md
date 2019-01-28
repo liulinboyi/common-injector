@@ -1,3 +1,12 @@
+<a name="0.0.1"></a>
+# [0.0.1](https://github.com/DimaLiLongJi/common-injector/releases/tag/v0.0.1) (2019-01-28)
+
+
+### Features
+
+* **injector:** remove method `setValue`, and add method `setInstance`
+
+
 <a name="0.0.0"></a>
 # [0.0.0](https://github.com/DimaLiLongJi/common-injector/releases/tag/v0.0.0) (2019-01-28)
 

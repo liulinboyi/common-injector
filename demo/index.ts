@@ -14,7 +14,7 @@ const otherInjector = new Injector();
 class AA {
   public aaa: string;
 }
-otherInjector.setValue(AA, {aaa: '123'});
+otherInjector.setInstance(AA, {aaa: '123'});
 
 @Injectable(otherInjector)
 class TestService5 {
@@ -29,7 +29,7 @@ class TestService4 {
 class TestService {
   @Inject() public aaa: TestService2;
   @Inject({injector: otherInjector}) public aaa2: TestService4;
-  @Inject({injector: otherInjector}) public aaab: AA;
+  @Inject() public aaab: AA;
 }
 
 const aaa = new TestService();

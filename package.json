@@ -1,11 +1,24 @@
 {
   "name": "common-injector",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Heavily influenced by Angular and it's implementation of dependency injection. Inspired by Angular and Indiv.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
     "build"
+  ],
+  "keywords": [
+    "ioc",
+    "di",
+    "javascript",
+    "typescript",
+    "node",
+    "dependency injection",
+    "inversion of control container",
+    "react",
+    "vue",
+    "indiv",
+    "angular"
   ],
   "scripts": {
     "start": "npm run clean && webpack --watch --mode=development & nodemon app.js",

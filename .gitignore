@@ -5,7 +5,7 @@
 /ssr-demo/dist
 /tmp
 /out-tsc
-# /build/*
+/build/*
 .cache
 .rpt2_cache
 

@@ -168,16 +168,16 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
 
 6. Set a constanst in `Injector`  在注入器中设置一个常量
 
-  In addition to `@Injectable`,  with the method `setValue` from instance of `Injector`, we can also insert a constant into `Injector` directly。
+  In addition to `@Injectable`,  with the method `setInstance` from instance of `Injector`, we can also insert a constant into `Injector` directly。
 
-  除了 `@Injectable` 之外，用过 `Injector` 实例的方法 `setValue` 也可以直接往注入器之中插入一个常量。
+  除了 `@Injectable` 之外，用过 `Injector` 实例的方法 `setInstance` 也可以直接往注入器之中放置一个常量。
 
   ```typescript
   const otherInjector = new Injector();
   class ConstantValue {
     public aaa: number;
   }
-  otherInjector.setValue(ConstantValue, {aaa: 123});
+  otherInjector.setInstance(ConstantValue, {aaa: 123});
   ```
 
   ```typescript

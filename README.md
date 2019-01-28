@@ -87,6 +87,10 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
 
   现在 `TestService` 已经在我们默认的注入器之中了，我们可以把它当做一个依赖来使用。
 
+  Because of using lazy initialization to initialize dependency, please pay attention to the **order** of dependency.
+
+  因为使用懒汉模式实例化依赖，所以请注意依赖之间的顺序。
+
 
 4. Inject dependencies into a class by using the `@Inject`  使用 `@Inject` 把依赖注入到类之中
 

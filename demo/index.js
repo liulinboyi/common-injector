@@ -13,14 +13,16 @@ const otherInjector = new Injector();
 
 class AA {}
 otherInjector.setInstance(AA, {aaa: '123'});
-@Injectable(otherInjector)
+
+class TestService5Type {}
+@Injectable({injector: otherInjector, provide: TestService5Type})
 class TestService5 {
   
 }
 
-@Injectable(otherInjector)
+@Injectable({injector: otherInjector})
 class TestService4 {
-  @Inject({injector: otherInjector, provide: TestService5}) aaa;
+  @Inject({injector: otherInjector, provide: TestService5Type}) aaa;
 }
 
 class TestService {

@@ -63,29 +63,49 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
   使用解释器 `@Injectable` 去声明一个依赖。并且所有的依赖将在它的注入器中成为一个单例。
 
   ```typescript
-  function Injectable(injector?: Injector): (_constructor: Function) => void;
+  type InjectOptions = {
+    provide?: any;
+    injector?: Injector;
+  };
+  function Injectable(injectOptions?: InjectOptions): (_constructor: Function) => any;
   ```
 
-  `@Injectable` will put a dependency in a defalut injector `rootInjector` as IOC container.
+  `@Injectable` will put a dependency into a defalut injector `rootInjector` as IOC container.
 
   `@Injectable` 把一个依赖放入一个默认作为IOC容器的注入器 `rootInjector`。
 
-  `@Injectable` accepts a parameter `Injector`, and you can create other container by instantiating a class `Injector`.
+  `@Injectable` will use the class itself as a default token in the IOC container.
 
-  `@Injectable` 接收一个参数 `Injector`，你也可以通过实例化一个类 `Injector` 来创建其他的容器。
+  `@Injectable` 会在IOC容器内用类自身当做一个默认token。
+
+  `@Injectable` accepts a parameter `injectOptions: { provide?: any; injector?: Injector; }`.
+  
+  `@Injectable` 接收一个参数 `injectOptions: { provide?: any; injector?: Injector; }`。
+
+  You can create other container with an instance which extends `Injector` by `injectOptions.injector`, or set an injection token for this injectable provider by `injectOptions.provide`.
+
+  你可以通过 `injectOptions.injector` 用一个继承 `Injector` 的实例来创建其他的容器， 或是通过 `injectOptions.provide` 来为这个可注入的类设置一个注入器token。
 
   ```typescript
   import { Injectable } from 'common-injector';
 
-  @Injectable()
+  class TestServiceToken {
+    public num: number;
+  }
+
+  @Injectable({ provide: TestServiceToken })
   class TestService {
     public num: number = 3;
   }
   ```
 
-  Now `TestService` has been in our default injector, we can use it as a dependency.
+  Now `TestService` has been in our default injector, and we should use `TestServiceToken` as a token in the IOC container。
 
-  现在 `TestService` 已经在我们默认的注入器之中了，我们可以把它当做一个依赖来使用。
+  现在 `TestService` 已经在我们默认的注入器之中了，并且应该用 `TestServiceToken` 在IOC容器内作为token使用。
+  
+  we can use it as a dependency，and need to use `TestServiceToken` as a token to mark this dependency.
+
+  我们可以把它当做一个依赖来使用。并且需要用 `TestServiceToken` 作为token标记这个依赖。
 
   Because of using lazy initialization to initialize dependency, please pay attention to the **order** of dependency.
 
@@ -103,7 +123,7 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
     provide?: any;
     injector?: Injector;
   };
-  function Inject(injectOptions?: InjectOptions): (_constructor: any, propertyName: string) => void;
+  function Inject(injectOptions?: InjectOptions): (_constructor: any, propertyName: string) => any;
   ```
 
   `@Inject` will get a dependency from a defalut injector `rootInjector`.
@@ -118,13 +138,17 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
   ```typescript
   import { Injectable, Inject } from 'common-injector';
 
-  @Injectable()
+  class TestServiceToken {
+    public num: number;
+  }
+
+  @Injectable({ provide: TestServiceToken })
   class TestService {
     public num: number = 3;
   }
 
   class App {
-    @Inject() private testService: TestService;
+    @Inject() private testService: TestServiceToken;
   }
   ```
 
@@ -160,7 +184,7 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
 
   ```typescript
   class App {
-    @Inject() private testService: TestService;
+    @Inject() private testService: TestServiceToken;
     @Inject({injector: otherInjector}) private testService2: TestService2;
   }
   ```
@@ -182,7 +206,7 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
 
   ```typescript
   class App {
-    @Inject() private testService: TestService;
+    @Inject() private testService: TestServiceToken;
     @Inject({injector: otherInjector}) private testService2: TestService2;
     @Inject({injector: otherInjector}) private constantValue: ConstantValue;
   }
@@ -200,7 +224,7 @@ A lightweight inversion of control container for JavaScript & Node.js apps.
 
   ```javascript
   class App {
-    @Inject({provide: TestService}) testService;
+    @Inject({provide: TestServiceToken}) testService;
     @Inject({injector: otherInjector, provide: TestService2}) testService2;
   }
   ```

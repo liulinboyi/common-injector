@@ -8,6 +8,15 @@
  */
 export class Injector {
   /**
+   * parent injector from forken child
+   *
+   * @private
+   * @type {Injector}
+   * @memberof Injector
+   */
+  public parentInjector: Injector;
+
+  /**
    * provider map: save provider with key and value
    *
    * @private
@@ -43,7 +52,14 @@ export class Injector {
    * @memberof Injector
    */
   public getProvider(key: any): any {
-    return this.providerMap.get(key);
+    if (this.providerMap.has(key)) {
+      return this.providerMap.get(key);
+    } else if (this.parentInjector) {
+      return this.parentInjector.getProvider(key);
+    } else {
+      console.error(`injector can't find provider: ${(key as any).name}`);
+      return undefined;
+    }
   }
 
   /**
@@ -67,17 +83,29 @@ export class Injector {
   public getInstance(key: any): any {
     if (this.instanceMap.has(key)) {
       return this.instanceMap.get(key);
+    } else if (this.getProvider(key)) {
+      const providerClass = this.getProvider(key);
+      const providerInsntance = new providerClass();
+      this.setInstance(key, providerInsntance);
+      return providerInsntance; 
+    } else if (this.parentInjector) {
+      return this.parentInjector.getInstance(key);
     } else {
-      if (this.getProvider(key)) {
-        const providerClass = this.getProvider(key);
-        const providerInsntance = new providerClass();
-        this.setInstance(key, providerInsntance);
-        return providerInsntance; 
-      } else {
-        console.error(`injector can't find provider: ${(key as any).name}`);
-        return undefined;
-      }
+      console.error(`injector could'n find instance of provider: ${(key as any).name}`);
+      return undefined;
     }
+  }
+
+  /**
+   * fork a child inject from this injector
+   *
+   * @returns {Injector}
+   * @memberof Injector
+   */
+  public fork(): Injector {
+    const childInjector = new Injector();
+    childInjector.parentInjector = this;
+    return childInjector;
   }
 }
 

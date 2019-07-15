@@ -10,8 +10,8 @@ class TestService2 {
   public fuck: string = 'fuck';
 }
 
-const otherInjector = new Injector();
-// const otherInjector = rootInjector.fork();
+// const otherInjector = new Injector();
+const otherInjector = rootInjector.fork();
 
 class AA {
   public aaa: string;
@@ -38,4 +38,4 @@ class TestService {
 }
 
 const aaa = new TestService();
-console.log(55555555, aaa.aaa);
+console.log(55555555, aaa);

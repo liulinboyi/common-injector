@@ -1,3 +1,11 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/DimaLiLongJi/common-injector/releases/tag/v1.0.0) (2019-07-15)
+
+### Fix
+
+* **injector** fix methods `getInstance` and method `getProvider`
+
+
 <a name="0.0.2"></a>
 # [0.0.2](https://github.com/DimaLiLongJi/common-injector/releases/tag/v0.0.2) (2019-02-02)
 

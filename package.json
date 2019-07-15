@@ -1,6 +1,6 @@
 {
   "name": "common-injector",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Heavily influenced by Angular and it's implementation of dependency injection. Inspired by Angular and Indiv.",
   "main": "build/index.js",
   "types": "build/index.d.ts",

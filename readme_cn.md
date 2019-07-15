@@ -1,6 +1,8 @@
 # common-injector
 
-深受Angular及其依赖注入实现的影响。 受 [Angular](https://github.com/angular/angular) 和 [Indiv](https://github.com/DimaLiLongJi/InDiv) 的启发。
+深受Angular及其依赖注入实现的影响。 
+
+受 [Angular](https://github.com/angular/angular) 和 [Indiv](https://github.com/DimaLiLongJi/InDiv) 的启发。
 
 一个轻量的JavaScript和Node.js控制反转容器。
 

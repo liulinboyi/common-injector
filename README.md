@@ -1,6 +1,8 @@
 # common-injector
 
-Heavily influenced by Angular and it's dependency injection. Inspired by [Angular](https://github.com/angular/angular) and [Indiv](https://github.com/DimaLiLongJi/InDiv).
+Heavily influenced by Angular and it's dependency injection. 
+
+Inspired by [Angular](https://github.com/angular/angular) and [Indiv](https://github.com/DimaLiLongJi/InDiv).
 
 A lightweight inversion of control container for JavaScript & Node.js apps.
 

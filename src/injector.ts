@@ -48,17 +48,22 @@ export class Injector {
    * get Provider(Map) by key for save provide
    *
    * @param {*} key
-   * @returns {*}
+   * @returns {{ injector: Injector, provider: any }}
    * @memberof Injector
    */
-  public getProvider(key: any): any {
+  public getProvider(key: any): { injector: Injector, provider: any } {
     if (this.providerMap.has(key)) {
-      return this.providerMap.get(key);
+      return {
+        injector: this,
+        provider: this.providerMap.get(key),
+      };
     } else if (this.parentInjector) {
       return this.parentInjector.getProvider(key);
     } else {
-      console.error(`injector can't find provider: ${(key as any).name}`);
-      return undefined;
+      return {
+        injector: undefined,
+        provider: undefined,
+      };
     }
   }
 
@@ -81,12 +86,13 @@ export class Injector {
    * @memberof Injector
    */
   public getInstance(key: any): any {
+    const { injector, provider } = this.getProvider(key);
+
     if (this.instanceMap.has(key)) {
       return this.instanceMap.get(key);
-    } else if (this.getProvider(key)) {
-      const providerClass = this.getProvider(key);
-      const providerInsntance = new providerClass();
-      this.setInstance(key, providerInsntance);
+    } else if (injector && provider) {
+      const providerInsntance = new provider();
+      injector.setInstance(key, providerInsntance);
       return providerInsntance; 
     } else if (this.parentInjector) {
       return this.parentInjector.getInstance(key);
